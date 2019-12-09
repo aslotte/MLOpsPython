@@ -36,6 +36,7 @@ stages:
           # Invoke the Python building and publishing a training pipeline
           python $(Build.SourcesDirectory)/ml_service/pipelines/${{ variables.BUILD_TRAIN_SCRIPT }}
       displayName: 'Publish Azure Machine Learning Pipeline'
+
 - stage: 'Trigger_AML_Pipeline'
   displayName: 'Train, evaluate, register model via previously published AML pipeline'
   jobs:
@@ -84,6 +85,8 @@ stages:
         PipelineId: '$(AMLPIPELINE_ID)'
         ExperimentName: '$(EXPERIMENT_NAME)'
         PipelineParameters: '"ParameterAssignments": {"model_name": "$(MODEL_NAME)", "hyperparameter_alpha": "$(ALPHA)"}'
+
+        
   - job: "Training_Run_Report"
     dependsOn: "Run_ML_Pipeline"
     displayName: "Determine if evaluation succeeded and new model is registered"
