@@ -131,7 +131,7 @@ try:
         else:
             print("New trained model metric is less than or equal to "
                   "production model so skipping model registration.")
-            run.parent.cancel()
+            # run.parent.cancel()
     else:
         print("This is the first model, "
               "thus it should be registered")
